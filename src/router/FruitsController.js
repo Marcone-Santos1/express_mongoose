@@ -3,12 +3,12 @@ import Fruit from "./FruitsModel.js";
 
 const router = Router();
 
-router.get("/fruits", async (req, res) => {
+router.get("/", async (req, res) => {
     const allFruits = await Fruit.find();
     res.send({ "Fruit": allFruits })
 })
 
-router.get("/fruits/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     const id = req.params.id;
     const fruit = await Fruit.findById({ _id: id });
 
@@ -19,7 +19,7 @@ router.get("/fruits/:id", async (req, res) => {
     return res.status(200).json(fruit);
 })
 
-router.post("/fruits/create", async (req, res) => {
+router.post("/create", async (req, res) => {
     const name = req.body.name
 
     if (name === undefined || name === "" || name === null) {
@@ -31,7 +31,7 @@ router.post("/fruits/create", async (req, res) => {
     return res.status(201).json(insertedFruit);
 })
 
-router.delete("/fruits/:id/delete", async (req, res) => {
+router.delete("/:id/delete", async (req, res) => {
 
     const id = req.params.id;
     const fruit = await Fruit.findByIdAndDelete({ _id: id });
@@ -43,7 +43,7 @@ router.delete("/fruits/:id/delete", async (req, res) => {
 
 })
 
-router.patch("/fruits/:id/update", async (req, res) => {
+router.patch("/:id/update", async (req, res) => {
 
     const id = req.params.id;
     const name = req.body.name;
